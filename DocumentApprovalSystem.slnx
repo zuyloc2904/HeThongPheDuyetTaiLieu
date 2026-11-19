@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/DocumentService/">
+    <Project Path="src/DocumentService/DocumentService.Api/DocumentService.Api.csproj" />
+    <Project Path="src/DocumentService/DocumentService.Core/DocumentService.Core.csproj" />
+    <Project Path="src/DocumentService/DocumentService.Infrastructure/DocumentService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/NotificationService/">
+    <Project Path="src/NotificationService/NotificationService.Worker/NotificationService.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DocumentService.Tests/DocumentService.Tests.csproj" />
+    <Project Path="tests/NotificationService.Tests/NotificationService.Tests.csproj" />
+  </Folder>
+</Solution>

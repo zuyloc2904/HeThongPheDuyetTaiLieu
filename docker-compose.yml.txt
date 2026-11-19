@@ -1,0 +1,36 @@
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: document_sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd123"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - document_network
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: document_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: "RabbitStrong@123"
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    networks:
+      - document_network
+
+volumes:
+  sql_data:
+  rabbit_data:
+
+networks:
+  document_network:
+    driver: bridge
