@@ -1,5 +1,13 @@
-using Microsoft.AspNetCore.OpenApi;
+using DocumentService.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
 
 builder.Services.AddOpenApi();
 
@@ -29,6 +37,21 @@ app.MapGet("/health", () =>
         service = "Document API",
         time = DateTime.UtcNow
     });
+});
+app.MapGet("/health/db", async (AppDbContext db) =>
+{
+    var connected = await db.Database.CanConnectAsync();
+
+    if (connected)
+    {
+        return Results.Ok(new
+        {
+            status = "Connected",
+            database = "DocumentApprovalDB"
+        });
+    }
+
+    return Results.Problem("Cannot connect to SQL Server");
 });
 
 app.Run();
