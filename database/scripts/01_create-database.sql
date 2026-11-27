@@ -52,3 +52,13 @@ GO
 CREATE INDEX IX_Notifications_Recipient_IsRead
 ON Notifications(Recipient, IsRead);
 GO
+
+SELECT * FROM Documents;
+SELECT Id, Title, CreatedBy, Approver, Status, CreatedAt
+FROM Documents
+ORDER BY CreatedAt DESC;
+SELECT Id, Title, Content, Approver, Status, UpdatedAt
+FROM Documents;
+SELECT *
+FROM Documents
+ORDER BY CreatedAt DESC;
